@@ -23,13 +23,13 @@ import (
 	"io"
 	"os"
 	"os/signal"
-	"syscall"
+	// "syscall"
 	"time"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"golang.org/x/sys/unix"
+	// "golang.org/x/sys/unix"
 	"golang.org/x/term"
 
 	"github.com/mendersoftware/go-lib-micro/ws"
@@ -412,7 +412,7 @@ func (c *TerminalCmd) runLoop(
 
 	// handle CTRL+C and signals
 	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, unix.SIGINT, unix.SIGTERM)
+	// signal.Notify(quit, unix.SIGINT, unix.SIGTERM)
 
 	// resize the terminal window
 	go c.resizeTerminal(ctx, msgChan, termID, termWidth, termHeight)
@@ -448,7 +448,7 @@ func (c *TerminalCmd) resizeTerminal(
 	termHeight int,
 ) {
 	resize := make(chan os.Signal, 1)
-	signal.Notify(resize, syscall.SIGWINCH)
+	// signal.Notify(resize, syscall.SIGWINCH)
 	defer signal.Stop(resize)
 
 	for {
