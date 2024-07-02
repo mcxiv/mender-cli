@@ -18,7 +18,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"os/signal"
+	// "os/signal"
 	"strconv"
 	"strings"
 	"time"
@@ -29,7 +29,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/vmihailenco/msgpack"
-	"golang.org/x/sys/unix"
+	// "golang.org/x/sys/unix"
 
 	"github.com/mendersoftware/mender-cli/client/deviceconnect"
 )
@@ -257,7 +257,7 @@ func (c *PortForwardCmd) run() error {
 
 	// handle CTRL+C and signals
 	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, unix.SIGINT, unix.SIGTERM)
+	// signal.Notify(quit, unix.SIGINT, unix.SIGTERM)
 
 	// wait for CTRL+C, signals or stop
 	restart := false
