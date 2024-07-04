@@ -126,6 +126,16 @@ artifacts  -- Operations on mender artifacts.
 login      -- Log in to the Mender server (required before other operation
 ```
 
+## Windows support
+
+Windows is not officially supported, as the signal concept of unix based systems
+is not available on Windows. But the `mender-cli` tool can be run after compiling 
+it for Windows, after commenting out the signal handling code in `cmd/terminal.go` and `cmd/portforward.go`.
+
+```console
+GOOS=windows GOARCH=amd64 go build
+```
+
 ## Contributing
 
 We welcome and ask for your contribution. If you would like to contribute to
