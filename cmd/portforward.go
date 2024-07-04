@@ -257,7 +257,7 @@ func (c *PortForwardCmd) run() error {
 
 	// handle CTRL+C and signals
 	quit := make(chan os.Signal, 1)
-	// signal.Notify(quit, unix.SIGINT, unix.SIGTERM)
+	// signal.Notify(quit, unix.SIGINT, unix.SIGTERM) // Windows doesn't have a similar concept of signals
 
 	// wait for CTRL+C, signals or stop
 	restart := false
