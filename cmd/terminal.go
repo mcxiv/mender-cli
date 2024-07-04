@@ -412,7 +412,7 @@ func (c *TerminalCmd) runLoop(
 
 	// handle CTRL+C and signals
 	quit := make(chan os.Signal, 1)
-	// signal.Notify(quit, unix.SIGINT, unix.SIGTERM)
+	// signal.Notify(quit, unix.SIGINT, unix.SIGTERM) // Windows doesn't have a similar concept of signals
 
 	// resize the terminal window
 	go c.resizeTerminal(ctx, msgChan, termID, termWidth, termHeight)
@@ -448,7 +448,7 @@ func (c *TerminalCmd) resizeTerminal(
 	termHeight int,
 ) {
 	resize := make(chan os.Signal, 1)
-	// signal.Notify(resize, syscall.SIGWINCH)
+	// signal.Notify(resize, syscall.SIGWINCH) // Windows doesn't have a similar concept of signals
 	defer signal.Stop(resize)
 
 	for {
