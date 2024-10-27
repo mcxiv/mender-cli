@@ -101,7 +101,22 @@ class TestDevicesList:
         r = c.run(
             "--server", "https://mender-api-gateway", "--skip-verify", "devices", "list", "--raw"
         )
-        pattern = r'(\[\{.*?\}\](?=\s|$))' # Regex for locating json in stdout
+        pattern = r'(\[\{.*?\}\](?=\s|$))'  # Regex for locating json in stdout
+        matches = re.findall(pattern, r.stdout, re.DOTALL)
+        raw_string = max(matches, key=len)
+        raw = json.loads(raw_string, strict=False)
+        assert r.returncode == 0, r.stderr
+        assert raw[0]["id"] == device_id
+        assert raw[0]["auth_sets"][0]["id"] == authset_id
+        assert raw[0]["status"] == "accepted"
+
+        # Devices should be listed in raw mode with custom page number
+        c = cli.MenderCliCoverage()
+        r = c.run(
+            "--server", "https://mender-api-gateway", "--skip-verify", "devices", "list", "--raw",
+            "--page-number", "1"
+        )
+        pattern = r'(\[\{.*?\}\](?=\s|$))'  # Regex for locating json in stdout
         matches = re.findall(pattern, r.stdout, re.DOTALL)
         raw_string = max(matches, key=len)
         raw = json.loads(raw_string, strict=False)
