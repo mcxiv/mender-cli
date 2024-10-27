@@ -38,7 +38,7 @@ const argPageNumber = "page-number"
 func init() {
 	devicesListCmd.Flags().IntP(argDetailLevel, "d", 0, "devices list detail level [0..3]")
 	devicesListCmd.Flags().BoolP(argRawMode, "r", false, "devices list raw mode (json from mender server)")
-	devicesListCmd.Flags().IntP(argPageNumber, "n", 1, "page number to query [1..x]")
+	devicesListCmd.Flags().IntP(argPageNumber, "p", 1, "page number to query [1..x]")
 }
 
 type DevicesListCmd struct {
@@ -72,8 +72,8 @@ func NewDevicesListCmd(cmd *cobra.Command, args []string) (*DevicesListCmd, erro
 	}
 
 	pageNumber, err := cmd.Flags().GetInt(argPageNumber)
-	if err != nil {
-		return nil, err
+	if pageNumber < 1 {
+		return nil, errors.New("Invalid page number, must be >= 1")
 	}
 
 	token, err := getAuthToken(cmd)
