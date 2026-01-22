@@ -36,11 +36,17 @@ build:
 build-autocomplete-scripts: build
 	@./mender-cli --generate-autocomplete
 
+build-windows:
+	GOOS=windows GOARCH=amd64 $(GO) build $(BUILDTAGS) $(GO_LDFLAGS) $(BUILDV) $(BUILDFLAGS) \
+	     -o mender-cli.windows.amd64.exe
+
 build-multiplatform:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GO) build $(BUILDTAGS) $(GO_LDFLAGS) $(BUILDV) $(BUILDFLAGS) \
 	     -o mender-cli.linux.amd64
 	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 $(GO) build $(BUILDTAGS) $(GO_LDFLAGS) $(BUILDV) $(BUILDFLAGS) \
 	     -o mender-cli.darwin.amd64
+	GOOS=windows GOARCH=amd64 $(GO) build $(BUILDTAGS) $(GO_LDFLAGS) $(BUILDV) $(BUILDFLAGS) \
+	     -o mender-cli.windows.amd64.exe
 
 build-coverage:
 	CGO_ENABLED=0 $(GO) build -cover -o mender-cli-test \

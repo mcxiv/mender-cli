@@ -14,8 +14,12 @@ require (
 	github.com/spf13/pflag v1.0.10
 	github.com/spf13/viper v1.21.0
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
-	golang.org/x/sys v0.39.0
 	golang.org/x/term v0.38.0
+)
+
+require (
+	github.com/mendersoftware/openssl v1.1.1-0.20221101135106-cb94d0a179f8 // indirect
+	golang.org/x/sys v0.39.0 // indirect
 )
 
 require (
@@ -31,7 +35,6 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
-	github.com/mendersoftware/openssl v1.1.1-0.20221101135106-cb94d0a179f8 // indirect
 	github.com/mendersoftware/progressbar v0.0.4 // indirect
 	github.com/minio/sha256-simd v1.0.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect

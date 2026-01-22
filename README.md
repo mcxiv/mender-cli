@@ -129,12 +129,21 @@ login      -- Log in to the Mender server (required before other operation
 ## Windows support
 
 Windows is not officially supported, as the signal concept of unix based systems
-is not available on Windows. But the `mender-cli` tool can be run after compiling 
-it for Windows, after commenting out the signal handling code in `cmd/terminal.go` and `cmd/portforward.go`.
+is not available on Windows. However, the `mender-cli` tool can be compiled for Windows 
+using the following command:
 
 ```console
-GOOS=windows GOARCH=amd64 go build
+GOOS=windows GOARCH=amd64 go build -tags 'nopkcs11'
 ```
+
+Or using the Makefile:
+
+```console
+make build-windows
+```
+
+Note: The signal handling code in `cmd/terminal.go` and `cmd/portforward.go` has already been 
+commented out for Windows compatibility in this branch.
 
 ## Contributing
 
