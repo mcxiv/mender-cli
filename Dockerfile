@@ -1,10 +1,10 @@
-FROM golang:1.25.0 as builder
+FROM golang:1.25.5 as builder
 WORKDIR /build
 ARG BUILDFLAGS=
 RUN --mount=type=bind,source=.,dst=/build,ro \
   GIT_DISCOVERY_ACROSS_FILESYSTEM=1 make build "BUILDFLAGS=-o /mender-cli ${BUILDFLAGS}"
 
-FROM python:3.13-slim as acceptance
+FROM python:3.14-slim as acceptance
 
 RUN pip3 install requests pytest cryptography boto3 docker
 COPY --from=builder /mender-cli /usr/bin/
